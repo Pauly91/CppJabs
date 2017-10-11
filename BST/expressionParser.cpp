@@ -4,7 +4,7 @@ using namespace std;
 
 
 /*
-Read up how to build a tree in cpp
+Read up how to build a tree in cpp and add the rest of the functionality for tree
 */
 
 
@@ -25,7 +25,10 @@ public:
         root = NULL;
         cout<<"Node created"<<endl;
     }
-    ~tree(){}
+    ~tree()
+    {
+        cout<<"Node Deleted"<<endl;
+    }
 
     void insert(int keyVal)
     {
@@ -47,6 +50,10 @@ public:
     {
         preOrder(root);
     }
+    void printInOrder()
+    {
+        inOrder(root);
+    }
 private:
     void preOrder(Node *node)// The input parameters should be const, look into const references.
     {
@@ -54,6 +61,15 @@ private:
         {
             cout<<node->keyVal<<endl;
             preOrder(node->left);
+            preOrder(node->right);
+        }
+    }
+    void inOrder(Node *node)
+    {
+        if(node != NULL)
+        {
+            preOrder(node->left);
+            cout<<node->keyVal<<endl;
             preOrder(node->right);
         }
     }
@@ -98,6 +114,13 @@ private:
 
 
 
+/*
+
+Read about expression trees, implementation and about inheritence. So inherit from tree class.
+
+*/
+
+
 class expressionParser
 {
 public:
@@ -123,6 +146,7 @@ int main()
     t1.insert(-1);
     t1.insert(6);
     t1.printPreOrder();
+    t1.printInOrder();
     return 0;
 
 }
