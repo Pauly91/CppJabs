@@ -30,6 +30,18 @@ public:
         cout<<"Node Deleted"<<endl;
     }
 
+    void del(int keyVal)
+    {
+        if(root == NULL)
+        {  
+            cout<<"Tree is empty"<<endl;
+            return;
+        }
+        else
+        {
+            del_P(root, keyVal)
+        }
+    }
     void insert(int keyVal)
     {
         if(root == NULL)
@@ -109,6 +121,22 @@ private:
             }  
         }
         
+    }
+    void search_P(Node *node,const int keyVal)
+    {
+        if(node->keyVal == keyVal)
+        {
+            return 
+        }
+    }
+    void del_P(Node *node,const int keyVal)
+    {
+
+        /*
+        Refer these:
+            - https://helloacm.com/how-to-delete-a-node-from-a-binary-search-tree/
+            - http://www.algolist.net/Data_structures/Binary_search_tree/Removal  
+        */
     }
 };
 
