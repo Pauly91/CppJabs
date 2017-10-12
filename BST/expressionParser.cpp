@@ -39,7 +39,7 @@ public:
         }
         else
         {
-            del_P(root, keyVal)
+            del_P(root, keyVal);
         }
     }
     void insert(int keyVal)
@@ -126,7 +126,7 @@ private:
     {
         if(node->keyVal == keyVal)
         {
-            return 
+            return ;
         }
     }
     void del_P(Node *node,const int keyVal)
