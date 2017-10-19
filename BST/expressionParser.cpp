@@ -27,6 +27,7 @@ public:
     }
     ~tree()
     {
+        // Go around a delallocate memory ?
         cout<<"Node Deleted"<<endl;
     }
 
@@ -58,6 +59,18 @@ public:
             insert_P(root, keyVal);
         }
     }
+    void search(const int keyVal)
+    {
+        Node *node = search_P(root, keyVal);
+        if(node != NULL)
+        {
+            cout<<"Node exist"<<endl;
+        } 
+        else
+        {
+            cout<<"Node is not present"<<endl;
+        }
+    }
     void printPreOrder()
     {
         preOrder(root);
@@ -66,6 +79,8 @@ public:
     {
         inOrder(root);
     }
+ ///////////////////////////////////////////////////////////////////////////////
+ //==========================================================================//   
 private:
     void preOrder(Node *node)// The input parameters should be const, look into const references.
     {
@@ -122,13 +137,26 @@ private:
         }
         
     }
-    void search_P(Node *node,const int keyVal)
+    Node* search_P(Node *node,const int keyVal)
     {
-        if(node->keyVal == keyVal)
+        if(node == NULL)
         {
-            return ;
+            return node;
+        }
+        else if(node->keyVal > keyVal)
+        {
+            return search_P(node->left,keyVal);
+        }
+        else if(node->keyVal < keyVal)
+        {
+            return search_P(node->right,keyVal);
+        }
+        else
+        {
+            return node;
         }
     }
+
     void del_P(Node *node,const int keyVal)
     {
 
@@ -137,6 +165,8 @@ private:
             - https://helloacm.com/how-to-delete-a-node-from-a-binary-search-tree/
             - http://www.algolist.net/Data_structures/Binary_search_tree/Removal  
         */
+        //Node *node = search_P(node,keyVal);
+
     }
 };
 
@@ -173,8 +203,11 @@ int main()
     t1.insert(0);
     t1.insert(-1);
     t1.insert(6);
+    cout<<endl<<endl;
     t1.printPreOrder();
     t1.printInOrder();
+    t1.search(3);
+    t1.search(9);
     return 0;
 
 }
