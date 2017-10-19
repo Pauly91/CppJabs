@@ -139,6 +139,14 @@ private:
     }
     Node* search_P(Node *node,const int keyVal)
     {
+        
+        /*
+         Make this with a while loop
+         -  This will be usefull to get the previous node for deletion of
+            nodes with 1 child.
+         */
+        
+        
         if(node == NULL)
         {
             return node;
