@@ -28,7 +28,7 @@ public:
     ~tree()
     {
         // Go around a delallocate memory ?
-        cout<<"Node Deleted"<<endl;
+        cout<<"Tree Deleted"<<endl;
     }
 
     void del(int keyVal)
@@ -40,9 +40,14 @@ public:
         }
         else
         {
-            del_P(root, keyVal);
+            Node *node = delete_P(root, keyVal);
+            if(node == NULL)
+            {
+                cout<<"The Node does not exist"<<endl;
+            }
         }
     }
+   
     void insert(int keyVal)
     {
         if(root == NULL)
@@ -71,6 +76,8 @@ public:
             cout<<"Node is not present"<<endl;
         }
     }
+
+
     void printPreOrder()
     {
         preOrder(root);
@@ -153,10 +160,12 @@ private:
         }
         else if(node->keyVal > keyVal)
         {
+            cout<<"val:"<<node->keyVal<<endl;
             return search_P(node->left,keyVal);
         }
         else if(node->keyVal < keyVal)
         {
+            cout<<"val:"<<node->keyVal<<endl;
             return search_P(node->right,keyVal);
         }
         else
@@ -173,8 +182,49 @@ private:
             - https://helloacm.com/how-to-delete-a-node-from-a-binary-search-tree/
             - http://www.algolist.net/Data_structures/Binary_search_tree/Removal  
         */
-        //Node *node = search_P(node,keyVal);
+        //Node *node = search_P(node,keyVal);       
 
+    }
+    Node * delete_P(Node* node, const int keyVal)
+    {
+        cout<<"Searching For:"<<keyVal<<endl;
+        Node *previousNode = NULL;
+        while(node != NULL)
+        {
+
+            if(node->keyVal == keyVal)
+            {
+                break;
+            }
+            else if(node->keyVal > keyVal)
+            {
+                previousNode = node;
+                node = node->left; 
+            }
+            else
+            {
+                previousNode = node;
+                node = node->right;  
+            }
+        
+        }
+        if(node == NULL)
+        {
+            return NULL;
+        }
+        if(node->right == NULL && node ->left == NULL)
+        {
+            if(previousNode->keyVal > node->keyVal)
+            {
+                previousNode->left = NULL;
+            }
+            else
+            {
+                previousNode->right = NULL;
+            }
+            delete node;
+        }
+        return node;
     }
 };
 
@@ -187,18 +237,7 @@ Read about expression trees, implementation and about inheritence. So inherit fr
 */
 
 
-class expressionParser
-{
-public:
-    expressionParser()
-    {
 
-    }
-
-
-private:
-    
-};
 
 
 
@@ -212,10 +251,26 @@ int main()
     t1.insert(-1);
     t1.insert(6);
     cout<<endl<<endl;
+    //t1.printPreOrder();
     t1.printPreOrder();
-    t1.printInOrder();
-    t1.search(3);
-    t1.search(9);
+    t1.search(5);
+    //t1.search(9);
+    t1.del(6);
+    t1.printPreOrder();
+    t1.del(6);
+    t1.printPreOrder();
     return 0;
 
+
+    
 }
+/*
+               1
+            /     \
+         0          3
+           \      /   \
+             -1 6      5    
+                     
+                     
+
+*/
