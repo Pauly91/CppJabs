@@ -173,19 +173,28 @@ private:
             return node;
         }
     }
-
+/*
     void del_P(Node *node,const int keyVal)
     {
 
-        /*
+        //
         Refer these:
-            - https://helloacm.com/how-to-delete-a-node-from-a-binary-search-tree/
-            - http://www.algolist.net/Data_structures/Binary_search_tree/Removal  
-        */
+          - https://helloacm.com/how-to-delete-a-node-from-a-binary-search-tree/
+          - http://www.algolist.net/Data_structures/Binary_search_tree/Removal  
+        //
         //Node *node = search_P(node,keyVal);       
 
     }
-    Node * delete_P(Node* node, const int keyVal)
+*/
+    Node* searchMin(Node *node)
+    {
+        while(node->left != NULL)
+        {
+            node = node->left;
+        }    
+        return node;
+    }
+    Node* delete_P(Node* node, const int keyVal)
     {
         cout<<"Searching For:"<<keyVal<<endl;
         Node *previousNode = NULL;
@@ -224,6 +233,37 @@ private:
             }
             delete node;
         }
+        else if(node->right == NULL && node->left != NULL)
+        {
+            if(previousNode->right == node)
+            {
+                previousNode->right = node->left;
+            }
+            else
+            {
+                previousNode->left = node->left;
+            }
+            delete node;
+        }
+        else if(node->right != NULL && node->left == NULL)
+        {
+            if(previousNode->right == node)
+            {
+                previousNode->right = node->right;
+            }
+            else
+            {
+                previousNode->left = node->right;
+            }
+            delete node;
+        }
+        else if(node->right != NULL && node->left != NULL)
+        {
+            Node *minNode = searchMin(node->right);
+            cout<<"Min Node: "<<minNode->keyVal<<endl;
+            node->keyVal = minNode->keyVal;
+            delete minNode;
+        }
         return node;
     }
 };
@@ -249,15 +289,19 @@ int main()
     t1.insert(5);
     t1.insert(0);
     t1.insert(-1);
-    t1.insert(6);
+    t1.insert(2);
     cout<<endl<<endl;
     //t1.printPreOrder();
     t1.printPreOrder();
     t1.search(5);
     //t1.search(9);
-    t1.del(6);
+    t1.del(3);
     t1.printPreOrder();
-    t1.del(6);
+    t1.del(0);
+    t1.printPreOrder();
+    t1.del(2);
+    t1.printPreOrder();
+    t1.del(2);
     t1.printPreOrder();
     return 0;
 
@@ -266,10 +310,10 @@ int main()
 }
 /*
                1
-            /     \
-         0          3
-           \      /   \
-             -1 6      5    
+            /    \
+         0        3
+        /       /   \
+      -1       5      5    
                      
                      
 
