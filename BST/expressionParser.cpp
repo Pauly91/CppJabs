@@ -186,12 +186,23 @@ private:
 
     }
 */
-    Node* searchMin(Node *node)
+    Node* searchMinForDel(Node *node)
     {
+        Node *prevNode = node;
+        node = node->right;
         while(node->left != NULL)
         {
+            prevNode = node;
             node = node->left;
         }    
+        if(prevNode->right != node)
+        {
+            prevNode->left = NULL;
+        }
+        else// This is case where the node under consideration has two leaves
+        {
+            prevNode->right = NULL;
+        }
         return node;
     }
     Node* delete_P(Node* node, const int keyVal)
@@ -259,7 +270,7 @@ private:
         }
         else if(node->right != NULL && node->left != NULL)
         {
-            Node *minNode = searchMin(node->right);
+            Node *minNode = searchMinForDel(node);
             cout<<"Min Node: "<<minNode->keyVal<<endl;
             node->keyVal = minNode->keyVal;
             delete minNode;
@@ -288,14 +299,19 @@ int main()
     t1.insert(3);
     t1.insert(5);
     t1.insert(0);
+    t1.insert(0);
     t1.insert(-1);
     t1.insert(2);
+    t1.insert(4);
+    t1.insert(8);
     cout<<endl<<endl;
     //t1.printPreOrder();
     t1.printPreOrder();
     t1.search(5);
     //t1.search(9);
-    t1.del(3);
+    t1.del(5);
+    t1.printPreOrder();
+    t1.insert(6);
     t1.printPreOrder();
     t1.del(0);
     t1.printPreOrder();
@@ -313,8 +329,16 @@ int main()
             /    \
          0        3
         /       /   \
-      -1       5      5    
+      -1       2      5    
+                    /   \
+                   4     8
                      
-                     
-
+              1
+            /    \
+         0        3
+        /       /   \
+      -1       2      8    
+                    /   
+                   4     
+     
 */
