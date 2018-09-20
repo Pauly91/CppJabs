@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 
 
 
@@ -7,12 +7,22 @@ class IFlyingBehaviour;
 class IQuackBehaviour;
 class IDisplayBehaviour;
 
-class IDuck
+
+
+class Duck
 {
     public:
+        void setFlyStrategy(int choice);
+        void setQuackStrategy(int choice);
+        void display();
+        void fly();
+        void quack();
+        Duck(std::string str):name(str){};
+    private:
         IFlyingBehaviour* f;
         IQuackBehaviour* q;
-        IDisplayBehaviour* d;
+        std::string name; 
+
 };
 
 class IFlyingBehaviour
@@ -28,11 +38,6 @@ class IQuackBehaviour
 };
 
 
-class IDisplayBehaviour
-{
-    public:
-        virtual void quacking() = 0;
-};
 
 class CJetFLying: public IFlyingBehaviour
 {
@@ -43,24 +48,84 @@ class CJetFLying: public IFlyingBehaviour
         }
 };
 
-
-
-
-class CCityDuck: public IDuck
+class CSlowFLying: public IFlyingBehaviour
 {
     public:
-        CCityDuck()
+        void flying()
         {
-            IFlyingBehaviour *f = new CJetFLying;
-            IQuackBehaviour* q = NULL;
-            IDisplayBehaviour* d = NULL;
+            std::cout<<"Slow Flying"<<std::endl;
         }
 };
 
+class CLoudQuack: public IQuackBehaviour
+{
+    public:
+        void quacking()
+        {
+            std::cout<<"Loud Quack"<<std::endl;
+        }
+};
+
+class CSoftQuack: public IQuackBehaviour
+{
+    public:
+        void quacking()
+        {
+            std::cout<<"Soft Quack"<<std::endl;
+        }
+};
+
+void Duck::setFlyStrategy(int choice)
+{
+    switch (choice)
+    {
+        case 1:
+            f = new CJetFLying;
+            break;
+        case 2:
+            f = new CSlowFLying;
+        default:
+            std::cout<<"Invalid Entry"<<std::endl;
+            break;
+    }
+}
+
+void Duck::setQuackStrategy(int choice)
+{
+    switch (choice)
+    {
+        case 1:
+            q = new CLoudQuack;
+            break;
+        case 2:
+            q = new CSoftQuack;
+        default:
+            std::cout<<"Invalid Entry"<<std::endl;
+            break;
+    }
+}
+
+void Duck::fly()
+{
+    f->flying();
+}
+void Duck::quack()
+{
+    q->quacking();
+}
+
+void Duck::display()
+{
+    std::cout<<name<<std::endl;
+}
+
 int main(int argc, char const *argv[])
 {
-    
-    CCityDuck c1;
-    c1.f->flying();
+    Duck cityDuck("City Duck");
+    cityDuck.setFlyStrategy(1);
+    cityDuck.setQuackStrategy(1);
+    cityDuck.display();
+    cityDuck.fly();
+    cityDuck.quack();
     return 0;
 }
