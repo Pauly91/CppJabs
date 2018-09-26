@@ -1,7 +1,8 @@
 # algoDSCppCodes
-Jab at Algo and DS with Cpp
 
-Things being implemented:
+Jab at Algorithms/DS and Design Patterns:
 
-- BST
-- AVL 
+* Design Patterns:
+    * Singleton
+    * Strategy
+    * Observer
