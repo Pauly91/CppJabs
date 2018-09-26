@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 
+// Reference: https://sourcemaking.com/design_patterns/strategy
+
+
 
 
 class IFlyingBehaviour; 
@@ -122,10 +125,12 @@ void Duck::display()
 int main(int argc, char const *argv[])
 {
     Duck cityDuck("City Duck");
+
     cityDuck.setFlyStrategy(1);
     cityDuck.setQuackStrategy(1);
     cityDuck.display();
     cityDuck.fly();
     cityDuck.quack();
+    
     return 0;
 }
