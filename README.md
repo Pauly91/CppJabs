@@ -6,3 +6,7 @@ Jab at Algorithms/DS and Design Patterns:
     * Singleton
     * Strategy
     * Observer
+    * Decorator
+
+* Algo/DS
+    * BST

@@ -2,6 +2,13 @@
 #include <vector>
 #include <string>
 
+/* 
+    - Observer pattern is useful when there is are multiple entities (Observers) looking for an information from a another entity (Subject) that keeps on
+      updating it's value. So rather that observers polling for the information the Subject pushs the updated information to the observers
+
+*/
+
+
 class IObserver;
 
 class ISubject
