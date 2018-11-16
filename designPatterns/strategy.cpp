@@ -4,7 +4,13 @@
 // Reference: https://sourcemaking.com/design_patterns/strategy
 
 
+/*
 
+This design pattern is used when there is some code to be shared
+and some code that is specfic to the object that is being created 
+
+
+*/
 
 class IFlyingBehaviour; 
 class IQuackBehaviour;

@@ -51,6 +51,10 @@ class CChocoIceCream: public IIceCream
     - What are the scenarios for the either or ?
 
 */    
+
+
+//  Concrete decorators can only exist with the base class.
+
 class Idecorator: public IIceCream
 {
     private:
@@ -114,7 +118,16 @@ class SparklesDecorator: public Idecorator
 int main(int argc, char const *argv[])
 {
     IIceCream *VSC = new ChocoChipDecorator(new SparklesDecorator(new CVanillaIceCream));
+    // The methods get called like a "recursion".
     std::cout<<VSC->getName()<<std::endl;
     std::cout<<"Price: "<<VSC->getPrice()<<std::endl;
     return 0;
 }
+
+/*
+    - The decorators should be similar to the base class.
+    - Also decorators patterns would make a more sense if the behaviour of the decorators are different
+      unlike the example.
+    - In essential add extra functionality on the fly.
+    - Deprecation of some functionalities of class. 
+*/
