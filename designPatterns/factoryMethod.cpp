@@ -30,8 +30,78 @@
 
 class financialFactory
 {
-    virtual void instrumentLogic() = 0;
-    static financialFactory* makeFinancialInstrument(int type); 
+    public:
+        virtual void instrumentLogic() = 0;
+        static financialFactory* makeFinancialInstrument(int type); 
     // By creating this as a static object the client is not required to create an object.
     // Also by making it static gives the same function throughout the object.
 };
+
+class mutualFunds : public financialFactory
+{
+    void instrumentLogic()
+    {
+        std::cout<<"I am mutual fund"<<std::endl;
+    }
+};
+class recurrentDeposit : public financialFactory
+{
+    void instrumentLogic()
+    {
+        std::cout<<"I am recurrentDeposit"<<std::endl;
+    }
+};
+class fixedDeposit : public financialFactory
+{
+    void instrumentLogic()
+    {
+        std::cout<<"I am fixedDeposit"<<std::endl;
+    }
+};
+class bladeDeposit : public financialFactory
+{
+    void instrumentLogic()
+    {
+        std::cout<<"I am blade money"<<std::endl;
+    }
+};
+
+
+
+
+financialFactory * financialFactory::makeFinancialInstrument(int choice)
+{
+    financialFactory * obj = NULL;
+    if (choice == 1) {
+        obj = new mutualFunds;
+    }
+    else if(choice == 2) {
+        obj = new recurrentDeposit;
+    }
+    else if(choice == 3) {
+        obj = new fixedDeposit;
+    }
+    else if(choice == 4) {
+        obj = new bladeDeposit;
+    }
+    else {
+        obj = NULL;   
+        std::cout<<"Invalid Choice"<<std::endl;
+    }
+    return obj;
+    
+}
+
+
+
+int main(int argc, char const *argv[])
+{
+    int choice;
+    std::cin>>choice;
+    financialFactory *obj = financialFactory::makeFinancialInstrument(choice);
+    if (obj != NULL) {
+        obj->instrumentLogic();
+    }
+    return 0;
+}
+
