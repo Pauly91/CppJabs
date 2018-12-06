@@ -93,8 +93,12 @@ financialFactory * financialFactory::makeFinancialInstrument(int choice)
 }
 
 
+/*
+    This function is the client code, here we see that the creating of different objects is independent 
+    of the client code, hence change in the financialFactory has minimal code change for the client.
 
-int main(int argc, char const *argv[])
+*/
+void clientCode()
 {
     int choice;
     std::cin>>choice;
@@ -102,6 +106,12 @@ int main(int argc, char const *argv[])
     if (obj != NULL) {
         obj->instrumentLogic();
     }
+}
+
+
+int main(int argc, char const *argv[])
+{
+    clientCode();
     return 0;
 }
 

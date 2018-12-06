@@ -9,6 +9,7 @@
 This design pattern is used when there is some code to be shared
 and some code that is specfic to the object that is being created 
 
+Strategy is a behavioral pattern.
 
 */
 
@@ -88,7 +89,7 @@ void Duck::setFlyStrategy(int choice)
 {
     switch (choice)
     {
-        case 1:
+        case 1: // This could be an enum instead.
             f = new CJetFLying;
             break;
         case 2:
@@ -101,6 +102,7 @@ void Duck::setFlyStrategy(int choice)
 
 void Duck::setQuackStrategy(int choice)
 {
+    // This setting of strategy is more like a factory .
     switch (choice)
     {
         case 1:
